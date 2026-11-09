@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Ubiquiti 面試準備｜AI 輔助開發與 SDD</title>
+<style>
+:root{--ink:#142033;--muted:#5b6a80;--blue:#315fc2;--line:#dbe3ef;--wash:#f3f6fb;--green:#17694d;--amber:#fff8e8}*{box-sizing:border-box}body{margin:0;background:#edf2f8;color:var(--ink);font:16px/1.65 Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}.wrap{max-width:1000px;margin:30px auto;padding:0 20px}.toolbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;color:var(--muted);font-size:14px}.toolbar button{border:0;background:var(--ink);color:white;padding:10px 15px;border-radius:8px;cursor:pointer}.hero,.qa{background:#fff;border:1px solid var(--line);border-radius:15px;padding:28px 34px;margin:15px 0;box-shadow:0 9px 28px #1a2d480c}.hero{padding:38px}.kicker{color:var(--blue);font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase}.hero h1{font-size:36px;line-height:1.15;margin:12px 0}.muted{color:var(--muted)}.notice{background:var(--amber);border-left:4px solid #dbb34e;padding:13px 16px;border-radius:8px;margin-top:18px;color:#614e21}.qa{scroll-margin-top:18px}.head{display:flex;gap:13px;align-items:flex-start}.num{width:40px;height:40px;flex:0 0 40px;background:#eaf0ff;color:#214da3;border-radius:12px;display:grid;place-items:center;font-weight:800}.qa h2{font-size:23px;line-height:1.3;margin:4px 0 13px}.label{color:var(--green);font-size:15px;font-weight:750;margin:18px 0 5px}.answer{font-size:15px;white-space:pre-line}.coach{background:var(--wash);border:1px solid var(--line);padding:12px 15px;border-radius:9px;margin-top:14px;font-size:14px}.need{color:#8a5b00;font-weight:700}.framework{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:14px 0}.cell{background:var(--wash);border:1px solid var(--line);padding:12px 14px;border-radius:9px}.cell b{display:block;color:#294d91;font-size:14px}.cell span{font-size:13px;color:#40516a}.footer{text-align:center;color:#7a879a;font-size:12px;padding:14px}@media(max-width:700px){.hero,.qa{padding:22px}.hero h1{font-size:30px}.framework{grid-template-columns:1fr}}@media print{body{background:white}.wrap{max-width:none;margin:0;padding:0 10px}.toolbar{display:none}.hero,.qa{box-shadow:none;break-inside:avoid-page;padding:20px}.qa{break-inside:auto}}
+</style></head>
+<body><main class="wrap">
+<div class="toolbar"><span>Ubiquiti Cloud Service Developer · AI 輔助開發與規格驅動開發</span><button onclick="window.print()">列印 / 存成 PDF</button></div>
+<header class="hero"><div class="kicker">面試準備 · 5 題可能問題</div><h1>AI 輔助開發<br>與規格驅動開發（SDD）</h1><p class="muted">依職缺對 AI 開發環境和規格驅動工作流程的要求整理。已知背景是你在 Dell 後期接觸過 SDD。</p><div class="notice"><b>使用提醒：</b>以下回答不假設你用過哪些 AI coding tool、Dell 實際採用哪套 SDD 流程，或帶來哪些量化成果。方括號內容需要用真實經驗補上。如果 Dell 的 SDD 和你使用 AI 工具是兩段不同經驗，面試時要分開說明。</div></header>
+<section class="qa"><div class="head"><div class="num">01</div><div><h2>你怎麼理解規格驅動開發？在 Dell 如何接觸或使用？</h2></div></div><div class="label">回答草稿</div><div class="answer">「我理解的規格驅動開發，是在開始實作前，先把預期行為和限制整理清楚，讓規格成為設計、實作和驗證時共同參考的依據，而不是只根據口頭需求直接寫程式。
+
+在 Dell 後期工作中，我有接觸 SDD。以 [具體功能或工作項目] 為例，我實際負責 [review 規格、釐清需求、撰寫部分規格、依規格實作，或驗證功能——請選符合實況的項目]。我們使用 [實際文件、模板或工具] 描述 [需求、介面、驗收條件或例外情況]，我再依照這些內容進行 [實作、review 或測試]。
+
+對我來說，主要好處是能在改程式之前先把假設和預期行為說清楚，讓團隊比較容易對齊。」</div><div class="coach"><b>準備提示：</b>說明你實際參與到哪個階段。不要把「接觸過」說成「主導整套流程」。請補一個 Dell 的真實工作例子。</div></section>
+<section class="qa"><div class="head"><div class="num">02</div><div><h2>你如何在 SDD 工作流程中使用 AI coding tool？</h2></div></div><div class="label">回答草稿 · 請填入實際工具</div><div class="answer">「我會把規格當成主要依據，把 AI 助手當成開發輔助工具，而不是由它決定需求或設計。我使用過 [Cursor／Claude Code／其他實際使用的工具] 協助 [探索程式碼、理解既有流程、起草小型實作、產生測試案例或整理變更——請填符合實況的內容]。
+
+我會提供相關規格、限制和必要的程式碼背景，然後依照驗收條件檢查建議內容。我會控制修改範圍、檢視 diff、執行適用的檢查；若產生的內容不符合預期，就修改或捨棄，不會未經驗證就直接採用。
+
+以 Dell 的經驗來說，[若 SDD 和 AI tool 有搭配，請說明一個實例；若沒有，請說明你在哪項不同工作中使用 AI tool]。」</div><div class="coach"><b>準備提示：</b>如果 Dell 的 SDD 沒有搭配 AI coding tool，就坦白說明這是兩段不同經驗。不要為了符合 JD，把它們說成同一套流程。</div><div class="coach"><b>你提到公司 AI governance tool：面試可這樣補充</b><p>「我也開始使用公司提供的 AI governance tool。我理解它的目的是讓 AI 輔助開發能在公司規範下安全、負責任地進行。它和 SDD 的角色不同：SDD 幫助團隊先對齊需求與規格；governance tool 則協助遵循公司對 AI 工具和資料使用的規範。具體管控方式我目前還在熟悉，不會先假設它具備哪些功能。」</p><p>常見治理範圍包括核准哪些 AI 工具／模型、如何處理機密程式碼或客戶資料、使用權限與記錄、合規和輸出審查；請確認你公司的工具實際涵蓋哪些項目後再具體描述。</p></div></section>
+<section class="qa"><div class="head"><div class="num">03</div><div><h2>遇到不清楚的需求時，你會如何整理成可執行的規格？</h2></div></div><div class="label">回答草稿</div><div class="answer">「我會先釐清誰會使用這項功能，以及系統應該呈現什麼行為，再把尚未確認的假設列出來。我會整理目標、輸入和輸出、API 或元件邊界、限制、失敗情境，以及可以驗收的條件。
+
+如果是後端變更，我也會確認狀態如何轉移，以及重試、重複請求、無效輸入和部分失敗時應該怎麼處理。我會盡量用具體例子或 Given/When/Then 情境，讓開發、QA 和 reviewer 對「完成」有相同理解。
+
+開始實作前，我會和相關人員確認未解問題。需求改變時，也要同步更新規格和驗收條件，讓實作與驗證維持一致。」</div><div class="coach"><b>準備提示：</b>可以連結 Event payload mapping、NIM inventory／版本判斷，或 file server 連線驗證；挑一個你確實參與的例子，說明原本哪裡不清楚。</div></section>
+<section class="qa"><div class="head"><div class="num">04</div><div><h2>你如何確認 AI 產生的程式符合規格，而且可以安全合併？</h2></div></div><div class="label">回答草稿</div><div class="answer">「我會把規格中的驗收條件當成檢查清單，逐項對照實作；也會檢視 diff，確認沒有不相關的修改，並檢查錯誤處理和邊界情況，不只看正常流程。
+
+接著執行 repository 中適用的自動化測試和靜態檢查。如果變更涉及多個服務或硬體介面，我也會確認整合介面，或在適用的測試環境驗證。AI 產生的測試也需要 review；測試若只是重複程式本身的假設，就不足以證明行為正確。
+
+如果修改範圍太大或內容不清楚，我會要求工具縮小範圍，或自行修改。工程師仍然要理解並負責核准每一項變更。」</div><div class="coach"><b>準備提示：</b>請依你實際使用的 review、CI 和測試流程調整，不要聲稱執行過不存在的測試。Dell 的 Jenkins pipeline 和自動化測試可用來說明你熟悉驗證流程。</div></section>
+<section class="qa"><div class="head"><div class="num">05</div><div><h2>你在 SDD 或 AI 輔助開發中遇過什麼挑戰？帶來什麼好處？</h2></div></div><div class="label">回答草稿 · 用一個實際故事補完整</div><div class="answer">「我認為 SDD 的主要好處，是能較早減少需求上的模糊。清楚的規格讓開發者和 reviewer 有共同目標，也能提供 AI 工具較完整的背景，協助它提出程式碼或測試建議。
+
+挑戰是規格可能不完整，或實作更新後規格沒有跟著更新。AI 工具也可能產生看起來合理、但忽略維運限制或邊界情況的程式。我的做法是和團隊確認假設、讓規格盡量貼近實作，並用具體驗收條件檢查結果。
+
+例如在 [Dell 的實際工作項目] 中，原本不清楚的是 [說明模糊處]；我們透過 [規格或討論方式] 釐清。我負責 [你的實際工作]，最後用 [測試、review、pipeline 或實際行為] 確認結果。帶來的改變是 [已知的成果；若沒有數字，就具體描述改善]。」</div><div class="coach"><b>準備提示：</b>沒有量化數字時不要編數字。可以描述需求更清楚、減少來回確認或提高驗收一致性，但最好用具體例子支持。</div></section>
+<section class="qa"><div class="head"><div class="num">06</div><div><h2>剛加入團隊時，你會如何快速熟悉 codebase 和系統架構？如果有大量 AI 工具，你會怎麼用？</h2></div></div><div class="label">建議回答 · 約 1 分鐘</div><div class="answer">「我會先建立一張可信的系統地圖，再用 AI 加快查找速度，而不會一開始就要求 AI 解釋整個 repo 或直接大量改程式。
+
+前幾天我會先確認如何建置、執行和測試服務，閱讀架構文件、主要 README、近期設計決策和團隊開發規範。接著挑一條最重要的 end-to-end 流程，從 API 或服務入口一路追到主要元件、資料存取和下游服務，並畫出自己的簡單圖，記下目前不確定的地方。
+
+我會用公司核准的 AI tool，針對目前 repo 提問，例如主要 entry point 在哪裡、某個 request 會經過哪些模組、哪些測試涵蓋這段行為。請工具指出檔案路徑和 symbol，再回到原始碼、文件和測試逐項確認；不把 AI 的摘要當成事實，也不輸入未授權的機密資料。
+
+接著我會接一個範圍小、風險低的 bug 或 change，依既有規格和測試流程完成一個 PR，請隊友 review。透過實際修改和 review feedback 校正我的架構理解，並把確認過的知識補進團隊文件。這樣能逐步上手，也不會因為快速使用 AI 而建立錯誤的系統模型。」</div><div class="framework"><div class="cell"><b>先跑起來</b><span>Build、run、tests、local workflow</span></div><div class="cell"><b>追一條流程</b><span>API → service/module → data store/downstream</span></div><div class="cell"><b>用 AI 尋路</b><span>要路徑、symbol、tests；回 repo 驗證</span></div><div class="cell"><b>用小 PR 驗證理解</b><span>低風險改動、review、更新文件</span></div></div><div class="coach"><b>準備提示：</b>可把 Dell 的跨服務經驗作為例子，但不要暗示你已經熟悉新公司的架構。AI 負責加速定位；架構理解和程式變更仍由你驗證並負責。</div></section><section class="qa"><div class="head"><div class="num">+</div><div><h2>正式使用回答前，先補齊這些真實細節</h2></div></div><div class="framework"><div class="cell"><b>AI 工具</b><span>你實際用過哪些工具？分別用來做什麼？</span></div><div class="cell"><b>一個 SDD 例子</b><span>Dell 哪個功能或工作使用規格？你負責哪部分？</span></div><div class="cell"><b>規格形式</b><span>文件、模板、設計頁、驗收條件，或其他產物？</span></div><div class="cell"><b>驗證方式</b><span>用了哪些測試、code review、Jenkins／CI 或整合檢查？</span></div><div class="cell"><b>結果</b><span>需求清晰度、review、返工或交付時間有什麼變化？只用確定的數字。</span></div><div class="cell"><b>使用界線</b><span>AI 工具能看到哪些程式碼或背景？你如何 review 它的修改？</span></div></div><p class="muted">補齊後，就能把草稿改成完全符合你 Dell 實際經驗的第一人稱回答。</p></section>
+<div class="footer">面試準備 · 清楚區分已確認經驗與建議回答方式</div>
+</main></body></html>

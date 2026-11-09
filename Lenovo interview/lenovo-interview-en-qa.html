@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lenovo ET&amp;T Interview · 15 Practice Questions</title>
+<style>
+  :root {
+    --ink: #142033;
+    --muted: #526179;
+    --blue: #2858af;
+    --line: #dce4ef;
+    --wash: #f3f6fb;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: #eaf0f7;
+    color: var(--ink);
+    font: 16px/1.7 Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  }
+  main { max-width: 900px; margin: 32px auto; padding: 0 20px; }
+  .intro, .qa-card {
+    margin: 16px 0;
+    padding: 26px 34px;
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    background: #fff;
+    box-shadow: 0 10px 28px #1a2d480c;
+  }
+  .eyebrow { color: var(--blue); font-size: 12px; font-weight: 750; letter-spacing: .1em; text-transform: uppercase; }
+  h1 { margin: 8px 0; font-size: 32px; line-height: 1.3; }
+  h2 { margin: 28px 0 10px; font-size: 23px; }
+  h3 { margin: 0 0 12px; font-size: 20px; line-height: 1.4; }
+  .intro p, .qa-card p { margin: 0; color: #30435e; }
+  .qa-card .note { margin-top: 14px; padding: 9px 12px; border-left: 3px solid var(--blue); background: var(--wash); font-size: 14px; }
+  .qa-card .references { margin-top: 10px; font-size: 14px; }
+  nav { display: flex; flex-wrap: wrap; gap: 4px 20px; margin-top: 14px; font-size: 14px; }
+  a { color: var(--blue); text-underline-offset: .18em; }
+  code { overflow-wrap: anywhere; font-size: .91em; }
+  @media screen and (max-width: 600px) {
+    main { margin: 16px auto; padding: 0 12px; }
+    .intro, .qa-card { padding: 18px; }
+    h1 { font-size: 26px; }
+  }
+  @media print {
+    body { background: white; }
+    main { max-width: none; margin: 0; padding: 0; }
+    .intro, .qa-card { box-shadow: none; border-radius: 0; break-inside: avoid; margin: 0 0 12px; padding: 16px; }
+    h2 { break-after: avoid; }
+    nav { display: none; }
+  }
+</style>
+</head>
+<body>
+<main>
+  <header class="intro">
+    <div class="eyebrow" lang="en">Lenovo · ET&amp;T Interview</div>
+    <h1>15 題面試練習與英文參考答案</h1>
+    <p>依照 Lenovo 職缺與目前的面試簡報整理。經歷題講實際做過的事，設計題用 <em lang="en">I would</em> 說明做法。</p>
+    <nav aria-label="題目分類">
+      <a href="#experience">01–08 簡報與實作追問</a>
+      <a href="#design">09–15 監控工具與 JD 技術題</a>
+    </nav>
+  </header>
+
+  <section aria-labelledby="experience">
+    <h2 id="experience">簡報與實作追問</h2>
+
+    <article class="qa-card">
+      <h3>01. 你的哪一段經驗最符合 Lenovo ET&amp;T 這個職缺？</h3>
+      <p lang="en">The closest match is my Serviceability work at Dell. I worked with two types of data that a monitoring tool needs. We collected hardware information from iDRAC over Redfish and workload performance from vCenter CMS. I also worked on iDRAC event mapping and routing. At Amazon Alexa, I helped connect a web UI to backend APIs and display metrics. That gives me experience with both collecting platform data and presenting it to users.</p>
+    </article>
+
+    <article class="qa-card">
+      <h3>02. 請完整走一次第 05 頁的 Redfish 收集流程。</h3>
+      <p lang="en">We define the collection intervals in a Helm ConfigMap. When a scheduled job runs, it notifies Platform Service. Platform Service forwards the request to the Node Agent. The Node Agent translates the authentication context for the target iDRAC and then calls its Redfish API. The collection scripts format the results for the Dell backend. CPU, memory, and VM performance come from vCenter Cluster Monitor Statistics, which is a separate data source.</p>
+    </article>
+
+    <article class="qa-card">
+      <h3>03. Redfish 和 vCenter 都有 CPU 相關資料。你們各拿什麼？</h3>
+      <p lang="en">In our workflow, iDRAC Redfish gives us hardware information such as processor health, storage information, PSU health, fan speed, temperature readings, and firmware state. vCenter CMS gives us CPU, memory, and VM performance. For example, a processor can report healthy while vCenter shows high CPU usage. The first signal describes hardware health. The second tells us how much compute the workloads are using.</p>
+    </article>
+
+    <article class="qa-card">
+      <h3>04. Node Agent 在認證流程中負責什麼？如果你來設計，會怎麼保護憑證？</h3>
+      <p lang="en">In our flow, Platform Service forwards the collection request, and the Node Agent prepares the authentication context for the target iDRAC before making the Redfish call. For a new collector, I would keep BMC credentials on the service side, use an account with only the permissions needed for monitoring, and verify TLS certificates. If the client uses a Redfish session, I’d keep its token out of logs and handle session expiry explicitly.</p>
+      <p class="note">面試官可能接著問你們實際用什麼 auth。簡報能確認的是 Node Agent 負責這一步。Basic Auth、session token 或其他機制，請以你們實際的做法回答。</p>
+      <p class="references"><a href="https://redfish.dmtf.org/schemas/DSP0266_1.16.0.html#redfish-session-login-authentication" lang="en">DMTF Redfish Authentication</a></p>
+    </article>
+
+    <article class="qa-card">
+      <h3>05. 第 06 頁的 iDRAC event 跟定期收集 telemetry 有什麼差別？</h3>
+      <p lang="en">Scheduled telemetry gives us a snapshot of hardware or workload state. The event flow handles a fault that has already been recorded. In our system, Platform Service wrote the iDRAC event to a fault list, and Event Manager checked that list for new records. It mapped the event to a payload with severity and device context, checked for duplicates using node, host, and component, and applied the throttling policy. The event went to vCenter and also to the Dell backend when reporting was required and enabled.</p>
+    </article>
+
+    <article class="qa-card">
+      <h3>06. 四種 log collector 有一個失敗時，使用者會拿到什麼？</h3>
+      <p lang="en">The main service dispatches the collection requests over gRPC, and the sidecars collect logs in parallel. Each collector reports its own result. If one fails, we record that failure in the database and package the successful sources into the ZIP. For example, if iDRAC log collection fails, the ESXi, vCenter, and microservice logs can still be included. Support can start investigating with the data that was collected.</p>
+    </article>
+
+    <article class="qa-card">
+      <h3>07. NIM 如何判斷要不要更新韌體？如果送出更新後連線中斷，你會怎麼處理？</h3>
+      <p lang="en">NIM starts with the installed hardware and firmware inventory. The hardware bundle catalog provides the target versions, and Dell System Upgrade CLI compares the two. When an update is needed, NIM uses Redfish to request it from iDRAC. If I were designing recovery for a connection loss after submission, I would check the existing job or task state before submitting another request. Once it completes, I would verify the installed firmware version against the target.</p>
+      <p class="note">把實際做過的版本比較與更新請求，和你會怎麼設計中斷後的復原分開說明。如果被追問 endpoint，就回答你們實際呼叫的 action。</p>
+      <p class="references"><a href="https://redfish.dmtf.org/schemas/DSP0266_1.12.0.html#asynchronous-operations" lang="en">DMTF Redfish Asynchronous Operations</a></p>
+    </article>
+
+    <article class="qa-card">
+      <h3>08. 映像檔複製從 2–3 小時降到約 30 分鐘。你實際改了什麼？</h3>
+      <p lang="en">I changed how NIM transferred the installation image. The original flow copied the OVA from an image mounted through iDRAC. I added a file-share path over a high-speed NIC. Before copying, the workflow selects and configures the NIC and verifies connectivity to the file server. If validation fails, NIM reports the error and exits. The copy took around 30 minutes on the faster path, compared with about two to three hours on the original path. Those numbers refer to the image copy step and depend on network conditions.</p>
+    </article>
+  </section>
+
+  <section aria-labelledby="design">
+    <h2 id="design">Lenovo 監控工具與 JD 技術題</h2>
+
+    <article class="qa-card">
+      <h3>09. 你用過 iDRAC Redfish。如果目標換成 OpenBMC，哪些能沿用，哪些要重新驗證？</h3>
+      <p lang="en">Redfish defines the management API, and OpenBMC’s bmcweb implements it. I would reuse the client logic for HTTP requests, resource discovery, and data normalization. I’d start at the Redfish service root and follow the resource links exposed by the device. Then I’d verify which resources and fields the target platform supports, especially anything that depended on Dell-specific extensions. I’d test the common fields on both platforms before adding vendor-specific handling.</p>
+      <p class="references" lang="en"><a href="https://github.com/openbmc/bmcweb">OpenBMC bmcweb</a> · <a href="https://redfish.dmtf.org/schemas/DSP0266_1.16.0.html">DMTF Redfish Specification</a></p>
+    </article>
+
+    <article class="qa-card">
+      <h3>10. 如果 iDRAC timeout，但 vCenter 仍顯示 CPU 使用率很高，Dashboard 應該怎麼顯示？</h3>
+      <p lang="en">I would show the two signals independently. The hardware panel would show the last successful reading with its timestamp and mark it as stale or unavailable. If the vCenter sample is still fresh, I would continue showing the current CPU usage. That lets the operator see both what we know about the workload and when we last verified the hardware state. I would also track collection failures separately so we can tell whether the monitoring path itself is having a problem.</p>
+    </article>
+
+    <article class="qa-card">
+      <h3>11. 如果要用 Go 每分鐘收集 1,000 台伺服器，你會怎麼設計？</h3>
+      <p lang="en">I’d stagger the polling schedule so all 1,000 devices don’t receive requests at the same time. I’d feed the jobs into a bounded worker pool and put a deadline on each HTTP request using a Go context. I would also prevent overlapping polls for the same BMC. To tune the worker count, I’d measure queue delay, request latency, and how many collections finish within the polling interval. That gives us a way to increase throughput while keeping the load on each BMC predictable.</p>
+      <p class="references" lang="en"><a href="https://pkg.go.dev/context">Go context</a> · <a href="https://pkg.go.dev/net/http">Go net/http</a></p>
+    </article>
+
+    <article class="qa-card">
+      <h3>12. 如果用 Python 處理不同廠商回傳的 Redfish JSON，你會怎麼做？</h3>
+      <p lang="en">I’d separate HTTP collection from parsing and normalization. The parser would map each response into a common record with a device ID, source, timestamp, status, and units where applicable. I’d keep a missing value distinct from a real zero. For example, a fan reading of zero RPM is different from a payload where the fan reading is absent. I’d test the parser with representative payloads from each platform, including partial responses and fields that are missing.</p>
+    </article>
+
+    <article class="qa-card">
+      <h3>13. 你會怎麼設計監控工具的 REST API 和 Web UI？Alexa 的經驗怎麼用在這裡？</h3>
+      <p lang="en">I’d expose a current health endpoint, such as <code>GET /api/v1/nodes/{id}/health</code>, and a separate metrics endpoint that accepts a time range. The health view would show component status, the data source, and the last successful collection time. The performance charts would show gaps when samples are missing. At Alexa, I helped connect a UI to backend APIs and turn response data into latency and token charts. I’d apply the same separation here. The backend defines what each metric means, and the UI makes it easy to interpret.</p>
+    </article>
+
+    <article class="qa-card">
+      <h3>14. Cluster 顯示 256 GB RAM，是否代表一台 VM 可以使用分布在兩台 host 上的 256 GB？你會怎麼監控？</h3>
+      <p lang="en">A cluster can report 256 GB of aggregate memory when two hosts each have 128 GB. A VM runs on one host at a time, so that aggregate figure does not describe the memory available to that individual VM. I’d show cluster capacity for planning, host-level usage for identifying resource pressure, and VM-level usage for finding the workload behind it. In vSphere, DRS can rebalance workloads by moving a VM to another host with vMotion.</p>
+      <p class="references" lang="en"><a href="https://developer.broadcom.com/xapis/virtual-infrastructure-json-api/latest/virtual-infrastructure/cluster-compute-resource/">Broadcom Cluster Compute Resource</a> · <a href="https://knowledge.broadcom.com/external/article?articleNumber=318908">Broadcom DRS and vMotion</a></p>
+    </article>
+
+    <article class="qa-card">
+      <h3>15. 你怎麼測試這套監控工具，確定它在裝置故障時仍顯示正確資訊？</h3>
+      <p lang="en">I’d start with an acceptance criterion. If Redfish times out while vCenter is still returning fresh data, the UI should show stale hardware health alongside current performance. I’d unit test parsing with sanitized payloads, then use a fake HTTP server to simulate timeouts, authentication failures, and malformed responses. I’d verify the result through the collector, API, and dashboard. Finally, I’d run the same checks against a lab BMC to confirm the behavior on real hardware.</p>
+    </article>
+  </section>
+</main>
+</body>
+</html>
